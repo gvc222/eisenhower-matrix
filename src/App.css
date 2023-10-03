@@ -1,0 +1,57 @@
+* {
+    background-color: #3f3f3f;
+    color: white;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.appTitle, .filters {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.listView {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.matrix {
+    display: grid;
+    gap: 0;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    padding: auto;
+    
+}
+
+.matrix ul {
+    margin: 10px;
+    padding: 10px;
+}
+
+.do {
+    background-color: rgb(255, 164, 164);
+}
+
+.decide {
+    background-color: rgb(252, 221, 169);
+}
+
+.delegate {
+    background-color: rgb(255, 255, 161);
+}
+
+.delete {
+    background-color: rgb(149, 252, 180);
+}
+
+.box {
+    width: 100%;
+    height: 100%;
+}
+
+li {
+    list-style-type: none;
+}
