@@ -55,3 +55,31 @@
 li {
     list-style-type: none;
 }
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.form-container input {
+    width: 80%;
+    height: 30px;
+    background-color: #c3c3c360;
+}
+
+.form-container button {
+    margin-top: 1vh;
+    margin-bottom: 3vh;
+    width: 80%;
+    height: 30px;
+}
+
+.filters button {
+    width: 10%;
+    margin-left: 1vw;
+    margin-right: 1vw;
+    background-color: black;
+}
