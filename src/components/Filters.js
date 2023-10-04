@@ -1,12 +1,12 @@
 import React from 'react'
 
-export const Filters = () => {
+export const Filters = ({handleFilterChange}) => {
   return (
     <div className="filters">
-        <button type="button">View All</button>
-        <button type="button">List View</button>
-        <button type="button">Matrix View</button>
-        <button type="button">Completed</button>
+        <button type="button" value="all" onClick={() => handleFilterChange('all')}>View All</button>
+        <button type="button" value="list" onClick={() => handleFilterChange('list')}>List View</button>
+        <button type="button" value="matrix" onClick={() => handleFilterChange('matrix')}>Matrix View</button>
+        <button type="button" value="completed" onClick={() => handleFilterChange('completed')}>Completed</button>
       </div>
   )
 }

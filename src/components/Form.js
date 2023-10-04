@@ -1,29 +1,29 @@
 import React, { useState } from "react";
 
-export const Form = (props) => {
-  //setting states for list content
-  const [name, setName] = useState("");
+export const Form = ({ addTask }) => {
+  const [task, setTask] = useState('');
+  const [category, setCategory] = useState('do')
+
   //handling submissions
   const handleSubmit = (e) => {
     e.preventDefault();
-    //handling if string in input is empty
-    // if (name === "") {
-    //   alert("Please enter a task");
-    // } else {
-    //   props.onSubmit(name);
-    //   //sets input value back to empty to reset
-    //   setName("");
-    // }
-    alert(`You have submitted a task! But that feature isn't added yet LOL`)
-  };
+    if (task.trim()) {
+      addTask({task, category});
+      setTask('');
+      setCategory('do')
+    } else {
+    alert("Please enter something")
+    };
+  }
+
   //handling changes in input
   const handleChange = (e) => {
-    setName(e.target.value);
+    setTask(e.target.value);
   };
 
   return (
     <div>
-      <form className="form-container">
+      <form onSubmit={handleSubmit} className="form-container">
         <h2>
           <label>What are you worried about?</label>
         </h2>
@@ -31,12 +31,13 @@ export const Form = (props) => {
         <input
           type="text"
           name="text"
-          value={name}
+          value={task}
           id="task-input"
           onChange={handleChange}
+          placeholder="Enter a task..."
         />
-        <button type="submit" onClick={handleSubmit}>
-          Add
+        <button type="submit">
+          Add Task
         </button>
       </form>
     </div>

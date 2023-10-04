@@ -1,9 +1,11 @@
 import './App.css'
-import React from 'react';
+import React, { useState } from 'react';
 import { Form } from './components/Form';
-import { Filters} from './components/Filters';
-import { Lists } from './components/Lists';
+import { Filters } from './components/Filters';
 import { Matrix } from './components/Matrix';
+import { ListView } from './components/ListView';
+// import { MatrixView } from './components/MatrixView';
+import { CompletedTasks } from './components/CompletedTasks';
 
 //Filter list object
 
@@ -12,35 +14,81 @@ import { Matrix } from './components/Matrix';
 function App() {
 
   //tracking state of list items
-  // const [tasks, setTasks] = useState('');
-  //tracking filter view
-  // const [filter, setFilter] = useState('List')
-
-  //defining the Lists Component with filters and maps method applied.
-  //We will call later in the App functions as {tasklist} instead of <Lists />
+  const [tasks, setTasks] = useState([]);
+  // tracking filter view
+  const [filter, setFilter] = useState('all')
+  const [ checkedTasks, setCheckedTasks ] = useState([])
   
+  const handleFilterChange = (filter) => {
+    setFilter(filter);
+  }
 
-  //We will use <Filters /> as {filterList} in App after mapping through each view list (name)
+  const handleCheckboxChange = (index) => {
+    setCheckedTasks(prevState => prevState.includes(index)
+      ? prevState.filter(item => item !== index)
+      : [...prevState, index]
+    );
+  }
+const handleCategoryChange = (taskId, newCategory) => {
+    setTasks(prevTasks => 
+      prevTasks.map(task => 
+        task.id === taskId ? { ...task, category: newCategory } : task
+      )
+    );
+  }
+  const handleDeleteButtonClick = (index) => {
+    setTasks(prevState => prevState.filter((_, i) => i !== index));
+  }
 
-  //function for adding task list using submit button in form
+  const filteredTasks = (view, category) => {
+    let filtered = tasks;
 
-  //toggle if task is complete or not by referencing their id
+    if (category !== 'all') {
+      filtered = tasks.filter((task) => task.category === category)
+    }
+
+    switch (view) {
+      case 'list':
+        return (
+          <ListView
+            tasks={filtered}
+            handleCategoryChange={handleCategoryChange}
+            handleCheckboxChange={handleCheckboxChange}
+            handleDeleteButtonClick={handleDeleteButtonClick}
+          />
+        )
+      case 'matrix':
+        return (
+          <Matrix />
+          // <MatrixView tasks={filtered} />
+        )
+      case 'completed':
+        return <CompletedTasks tasks={checkedTasks}/>
+      default:
+        return(
+        <div>
+          <ListView
+            tasks={filtered}
+            handleCategoryChange={handleCategoryChange}
+            handleCheckboxChange={handleCheckboxChange}
+            handleDeleteButtonClick={handleDeleteButtonClick}
+          />
+          <Matrix />
+        </div>
+        )
+    }
+  }
   
-  
-
-  //delete task by clicking delete button
 
   return (
     <div className="app">
       <h1 className='appTitle'>Boinkie's Eisenhower Matrix App</h1>
-      {/* Input for writing new task and button to submit the form */}
-      <Form/>
-      {/* Change the view type from List only to Matrix or both, contains <Filters /> component */}
-      <Filters />
-      {/* List of tasks in a to-do list format, contains <Lists /> component */}
-      <Lists />
-      {/* Tasks categorized in an Eisenhower Matrix */}
-      <Matrix />
+      <Form addTask={(task) => setTasks([...tasks, task])}/>
+      
+      <Filters handleFilterChange={handleFilterChange} handleCategoryChange={handleCategoryChange}/>
+
+      {filteredTasks(filter, 'all')}
+      
     </div>
   );
 }
