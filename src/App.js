@@ -1,20 +1,21 @@
 import './App.css'
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Form } from './components/Form';
 import { Filters } from './components/Filters';
 import { Matrix } from './components/Matrix';
 import { ListView } from './components/ListView';
-// import { MatrixView } from './components/MatrixView';
+import { Instructions } from './components/Instructions';
 import { CompletedTasks } from './components/CompletedTasks';
-
-//Filter list object
-
-//Get keys of Filter list Object
 
 function App() {
 
   //tracking state of list items
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState([
+    {id: 1, task: 'Eat', category: 'do'},
+    {id: 2, task: 'Sleep', category: 'decide'},
+    {id: 3, task: 'Cook', category: 'delegate'},
+    {id: 4, task: 'Social Media', category: 'delete'}
+  ]);
   // tracking filter view
   const [filter, setFilter] = useState('all')
   const [ checkedTasks, setCheckedTasks ] = useState([])
@@ -23,11 +24,14 @@ function App() {
     setFilter(filter);
   }
 
+  const checkedTasksRef = useRef([]);
   const handleCheckboxChange = (index) => {
-    setCheckedTasks(prevState => prevState.includes(index)
-      ? prevState.filter(item => item !== index)
-      : [...prevState, index]
-    );
+    // console.log(`Checkbox clicked for index ${index}`)
+    checkedTasksRef.current = checkedTasksRef.current.includes(index)
+      ? checkedTasksRef.current.filter(item => item !== index)
+      : [...checkedTasksRef.current, index];
+    
+    setCheckedTasks(checkedTasksRef.current); // Update the state with the current ref value
   }
 const handleCategoryChange = (taskId, newCategory) => {
     setTasks(prevTasks => 
@@ -55,15 +59,17 @@ const handleCategoryChange = (taskId, newCategory) => {
             handleCategoryChange={handleCategoryChange}
             handleCheckboxChange={handleCheckboxChange}
             handleDeleteButtonClick={handleDeleteButtonClick}
+            checkedTasks={checkedTasks}
           />
         )
       case 'matrix':
         return (
-          <Matrix />
-          // <MatrixView tasks={filtered} />
+          <Matrix tasks={filtered}/>
+          
         )
       case 'completed':
-        return <CompletedTasks tasks={checkedTasks}/>
+        const completedTasks = tasks.filter((_, index) => checkedTasksRef.current.includes(index))
+        return <CompletedTasks tasks={completedTasks} checkedTasks={checkedTasksRef.current}/>
       default:
         return(
         <div>
@@ -72,8 +78,9 @@ const handleCategoryChange = (taskId, newCategory) => {
             handleCategoryChange={handleCategoryChange}
             handleCheckboxChange={handleCheckboxChange}
             handleDeleteButtonClick={handleDeleteButtonClick}
+            checkedTasks={checkedTasks}
           />
-          <Matrix />
+          <Matrix tasks={filtered}/>
         </div>
         )
     }
@@ -83,6 +90,8 @@ const handleCategoryChange = (taskId, newCategory) => {
   return (
     <div className="app">
       <h1 className='appTitle'>Boinkie's Eisenhower Matrix App</h1>
+      
+      <Instructions />
       <Form addTask={(task) => setTasks([...tasks, task])}/>
       
       <Filters handleFilterChange={handleFilterChange} handleCategoryChange={handleCategoryChange}/>

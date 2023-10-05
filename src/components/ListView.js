@@ -5,6 +5,7 @@ export const ListView = ({
   handleCheckboxChange,
   handleDeleteButtonClick,
   handleCategoryChange,
+  checkedTasks
 }) => {
   return (
     <ul className="listView">
@@ -12,14 +13,14 @@ export const ListView = ({
         <li key={index}>
           <input
             type="checkbox"
-            checked={task.checked}
+            checked={checkedTasks.includes(index)}   
             onChange={() => handleCheckboxChange(index)}
           />
           <label>{task.task}</label>
           <select
             name="category"
             value={task.category}
-            onChange={(e) => handleCategoryChange(e, index)}
+            onChange={(e) => handleCategoryChange(task.id, e.target.value)}
           >
             <option value="do">Do</option>
             <option value="decide">Decide</option>

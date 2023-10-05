@@ -2,10 +2,10 @@ import React from 'react'
 
 export const CompletedTasks = ({tasks}) => {
   return (
-    <ul>
-      {tasks.map((index) => (
+    <ul className='completed-list'>
+      {tasks.map((task, index) => (
         <li key={index}>
-          <label>{tasks[index].task}</label>
+          <label>{task.task}</label>
         </li>
       ))}
     </ul>

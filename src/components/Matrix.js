@@ -1,36 +1,56 @@
-import React from 'react'
+import React from 'react';
 
-export const Matrix = () => {
+export const Matrix = ({ tasks }) => {
+  const doTasks = tasks.filter(task => task.category === 'do');
+  const decideTasks = tasks.filter(task => task.category === 'decide');
+  const delegateTasks = tasks.filter(task => task.category === 'delegate');
+  const deleteTasks = tasks.filter(task => task.category === 'delete');
+
   return (
     <div className='matrix'>
-        <div className="do box">
-        <ul className='do'>
+      <div className="matrix-row">
+        <div className="matrix-column">
           <label>Do now</label>
-          <li>Eat</li>
-        </ul>
-        </div>
-
-        <div className="decide box">
-        <ul className='decide'>
+          <ul className='do'>
+            {doTasks.map((task) => 
+              <li className='do' key={task.id}>{task.task}</li>
+            )}
+          </ul>
+          
           <label>Decide</label>
-          <li>Homework</li>
-        </ul>
+          <ul className='decide'>
+            {decideTasks.map((task) => 
+              <li className='decide' key={task.id}>{task.task}</li>
+            )}
+          </ul>
         </div>
 
-        <div className="delegate box">
-        <ul className='delegate'>
-          <label>Delegate</label>
-          <li>Throwing trash</li>
-        </ul>
-        </div>
-
-        <div className="delete box">
-        <ul className='delete'>
-          <label>Delete</label>
-          <li>Worry</li>
-        </ul>
-        </div>
-
+        
+          
+        
       </div>
+
+      <div className="matrix-row">
+        <div className="matrix-column">
+          <label>Delegate</label>
+          <ul className='delegate'>
+            {delegateTasks.map((task) => 
+              <li className='delegate' key={task.id}>{task.task}</li>
+            )}
+          </ul>
+
+          <label>Delete</label>
+          <ul className='delete'>
+            {deleteTasks.map((task) => 
+              <li className='delete' key={task.id}>{task.task}</li>
+            )}
+          </ul>
+        </div>
+
+        
+          
+        
+      </div>
+    </div>
   )
 }

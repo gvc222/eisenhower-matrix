@@ -1,20 +1,17 @@
 * {
-    background-color: #3f3f3f;
+    background-color: #224031;
     color: white;
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-.appTitle, .filters {
+.appTitle, .filters, .appTitle, .filters, .listView, .form-container, .completed-list, .instructions {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .listView {
-    display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
 }
 .matrix {
     display: grid;
@@ -23,7 +20,7 @@
     align-items: center;
     margin: auto;
     padding: auto;
-    
+    grid-template-columns: repeat(2, 1fr);
 }
 
 .matrix ul {
@@ -31,6 +28,9 @@
     padding: 10px;
 }
 
+.matrix li {
+    color:#3f3f3f;
+}
 .do {
     background-color: rgb(255, 164, 164);
 }
@@ -45,11 +45,6 @@
 
 .delete {
     background-color: rgb(149, 252, 180);
-}
-
-.box {
-    width: 100%;
-    height: 100%;
 }
 
 li {
@@ -67,7 +62,6 @@ li {
 .form-container input {
     width: 80%;
     height: 30px;
-    background-color: #c3c3c360;
 }
 
 .form-container button {
@@ -82,4 +76,41 @@ li {
     margin-left: 1vw;
     margin-right: 1vw;
     background-color: black;
+}
+
+.completed-list {
+    display: flex;
+
+}
+
+  
+.matrix-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.matrix-column {
+    flex: 1;
+}
+
+
+.steps-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 1rem;
+}
+
+div .steps-container {
+    background-color: black;
+}
+
+.instructions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
 }
