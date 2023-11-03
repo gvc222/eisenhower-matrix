@@ -37,15 +37,15 @@ function App() {
   }
 
   // useEffect for local storage saving
-  useEffect(() => {
-    const savedTasks = JSON.parse(localStorage.getItem("my-eisenhower-list"));
-    setTasks(savedTasks)
-    console.log(savedTasks)
-  }, [])
+  // useEffect(() => {
+  //   const savedTasks = JSON.parse(localStorage.getItem("my-eisenhower-list"));
+  //   setTasks(savedTasks)
+  //   console.log(savedTasks)
+  // }, [])
 
-  useEffect(() => {
-    localStorage.setItem("my-eisenhower-list", JSON.stringify(tasks))
-  }, [tasks])
+  // useEffect(() => {
+  //   localStorage.setItem("my-eisenhower-list", JSON.stringify(tasks))
+  // }, [tasks])
 
 const handleCategoryChange = (taskId, newCategory) => {
     setTasks(prevTasks => 
