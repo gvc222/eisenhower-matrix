@@ -5,7 +5,8 @@ export const ListView = ({
   handleCheckboxChange,
   handleDeleteButtonClick,
   handleCategoryChange,
-  checkedTasks
+  checkedTasks,
+  
 }) => {
   return (
     <ul className="listView">

@@ -1,5 +1,5 @@
 * {
-    background-color: #224031;
+    background-color: #078681;
     color: white;
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
@@ -64,6 +64,11 @@ li {
     height: 30px;
 }
 
+input::placeholder {
+    color: white;
+    
+}
+
 .form-container button {
     margin-top: 1vh;
     margin-bottom: 3vh;
@@ -114,3 +119,78 @@ div .steps-container {
     flex-direction: column;
     text-align: center;
 }
+
+.completed-list ul {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+}
+
+.completed-list li{
+    margin-right: 10px;
+}
+
+.completed-list {
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
+  }
+  
+  .completed-list h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+  }
+  
+  .completed-list-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+  }
+
+  .completed {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    vertical-align: center;
+  }
+  
+  .completed-task-list {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 200px;
+    border-radius: 8px;
+  }
+  
+ .completed-task-list li {
+    display: flex;
+    flex-direction: column;
+ }
+
+  .matrix {
+    /* border: 2px dashed blue; */
+    margin-left: 20%;
+    margin-right: 20%;
+  }
+
+  .matrix-column {
+    /* border: 1px dashed red; */
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+
+  .matrix label {
+    display: flex;
+    justify-content: center;
+    font-size: 1.4rem;
+  }
+
+  .matrix li {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    font-size: 1.2rem;
+  }

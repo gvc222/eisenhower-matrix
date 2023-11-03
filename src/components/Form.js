@@ -8,9 +8,9 @@ export const Form = ({ addTask }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (task.trim()) {
-      addTask({task, category});
+      addTask(task);
       setTask('');
-      setCategory('do')
+      setCategory(category)
     } else {
     alert("Please enter something")
     };

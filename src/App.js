@@ -1,20 +1,22 @@
 import './App.css'
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Form } from './components/Form';
 import { Filters } from './components/Filters';
 import { Matrix } from './components/Matrix';
 import { ListView } from './components/ListView';
 import { Instructions } from './components/Instructions';
 import { CompletedTasks } from './components/CompletedTasks';
+import { nanoid } from 'nanoid';
 
 function App() {
 
+  
   //tracking state of list items
   const [tasks, setTasks] = useState([
-    {id: 1, task: 'Eat', category: 'do'},
-    {id: 2, task: 'Sleep', category: 'decide'},
-    {id: 3, task: 'Cook', category: 'delegate'},
-    {id: 4, task: 'Social Media', category: 'delete'}
+    {id: nanoid(), task: 'Eat', category: 'do'},
+    {id: nanoid(), task: 'Sleep', category: 'decide'},
+    {id: nanoid(), task: 'Cook', category: 'delegate'},
+    {id: nanoid(), task: 'Social Media', category: 'delete'}
   ]);
   // tracking filter view
   const [filter, setFilter] = useState('all')
@@ -33,6 +35,18 @@ function App() {
     
     setCheckedTasks(checkedTasksRef.current); // Update the state with the current ref value
   }
+
+  // useEffect for local storage saving
+  useEffect(() => {
+    const savedTasks = JSON.parse(localStorage.getItem("my-eisenhower-list"));
+    setTasks(savedTasks)
+    console.log(savedTasks)
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem("my-eisenhower-list", JSON.stringify(tasks))
+  }, [tasks])
+
 const handleCategoryChange = (taskId, newCategory) => {
     setTasks(prevTasks => 
       prevTasks.map(task => 
@@ -86,13 +100,21 @@ const handleCategoryChange = (taskId, newCategory) => {
     }
   }
   
+  const addTask = (task) => {
+    const newTask = {
+      id: nanoid(),
+      task: task,
+      category: 'do'
+    }
+    setTasks([...tasks, newTask])
+  }
 
   return (
     <div className="app">
       <h1 className='appTitle'>Boinkie's Eisenhower Matrix App</h1>
       
       <Instructions />
-      <Form addTask={(task) => setTasks([...tasks, task])}/>
+      <Form addTask={addTask}/>
       
       <Filters handleFilterChange={handleFilterChange} handleCategoryChange={handleCategoryChange}/>
 
