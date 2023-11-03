@@ -1,4 +1,5 @@
 import React from "react";
+import { MdDeleteForever } from 'react-icons/md';
 
 export const ListView = ({
   tasks,
@@ -17,7 +18,9 @@ export const ListView = ({
             checked={checkedTasks.includes(index)}   
             onChange={() => handleCheckboxChange(index)}
           />
+          <span> </span>
           <label>{task.task}</label>
+          <span> </span>
           <select
             name="category"
             value={task.category}
@@ -28,7 +31,8 @@ export const ListView = ({
             <option value="delegate">Delegate</option>
             <option value="delete">Delete</option>
           </select>
-          <button onClick={() => handleDeleteButtonClick(index)}>Delete</button>
+          <span> </span>
+          <MdDeleteForever className="delete-button" onClick={() => handleDeleteButtonClick(index)} />
         </li>
       ))}
     </ul>

@@ -155,7 +155,7 @@ div .steps-container {
     text-align: center;
     vertical-align: center;
   }
-  
+
   .completed-task-list {
     display: flex;
     flex-direction: column;
@@ -193,4 +193,8 @@ div .steps-container {
     text-align: center;
     justify-content: center;
     font-size: 1.2rem;
+  }
+
+  .delete-button:hover {
+    cursor: pointer;
   }
